@@ -113,6 +113,7 @@ int		ft_printf(char *format, ...)
 			ft_bzero(fmt.sign, 4);
 			fmt.precision = 0;
 			fmt.width = 0;
+			fmt.dot = 0;
 			str++;	
 			if (formated(&str, &fmt))
 				quantity += find_function(&fmt, &arg_ptr);
