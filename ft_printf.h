@@ -28,7 +28,12 @@ int		        formated(char **string, t_specifications *fmt);
 int		        ft_printf(char *format, ...);
 
 /*find_function.c*/
-int		c(t_specifications *data, va_list *ap);
 int		find_function(t_specifications *data, va_list *ap);
+
+int		c(t_specifications *data, va_list *ap);
+int		f(t_specifications *data, va_list *ap);
+
+
+char*  floatToString(double num, int precision);
 
 #endif
