@@ -82,6 +82,7 @@ SRC =  ft_atoi.c\
 	   ft_ltoa_base.c\
 	   ft_ulltoa_base.c\
 	   ft_concat_and_free.c\
+	   ft_concat_and_freehead.c\
 	   ft_print_file.c\
 	   gnl/get_next_line.c
 

@@ -92,6 +92,7 @@ void				ft_swap(char *s1, char *s2);
 char				*ft_itoa_base(int num, int base);
 char				*ft_ltoa_base(long long num, int base);
 char				*ft_concat_and_free(char *head, char *tail);
+char				*ft_concat_and_freehead(char *head, char *tail);
 char				*ft_ulltoa_base(unsigned long long num,
 										unsigned long long base);
 int					ft_print_file(int fd);
