@@ -56,20 +56,27 @@ static char		circle_substraction(char *m, char *second_arg)
 }
 
 
-static void 	move_mantissa(char *m, char *second_arg)
+static void 	move_mantissa(char *m, char *second_arg, char *result, int *i)
 {
 	char 		*tmp;
 	char 		*tmp2;
 	char 		*tmp3;
+	char		*tmp_res;
 
 	tmp = m;
 	tmp2 = m + 1;
+	tmp_res = tmp2;
 	while (*tmp == '0')
 		tmp++;
 	tmp3 = tmp;
 	while (*(tmp3 + 1) != '\0')
 		tmp3++;
 	tmp2 = ft_memcpy(tmp2, tmp, tmp3 - tmp);
+	if (tmp != tmp2)
+	{
+		while (tmp_res++ != tmp)
+			result[(*i)++] = '0';
+	}
 	if (tmp3 - tmp > tmp - tmp2)
 		tmp = tmp2 + (tmp3 - tmp);
 	while (*tmp)
@@ -86,17 +93,17 @@ char 			*divide_m(unsigned long long mantissa, t_specifications *data)
 	char 		*tmp;
 
 	i = 0;
-	if (!(result = malloc(data->precision + 22)))
+	if (!(result = malloc(data->precision + 22 + 31)))
 		return (NULL);
-	result[data->precision + 22] = '\0';
+	result[data->precision + 22 + 31] = '\0';
 	result[i++] = '1';
 	result[i++] = '.';
 	m = ft_ulltoa_base(mantissa - 9223372036854775808, 10);
 	m = ft_concat_and_freehead(m, "0");
-	while (i < data->precision + 22)
+	while (i < data->precision + 22 + 31)
 	{
 		result[i++] = circle_substraction(m, "9223372036854775808");
-		move_mantissa(m, "9223372036854775808");
+		move_mantissa(m, "9223372036854775808", result, &i);
 	}
 	return (result);
 }

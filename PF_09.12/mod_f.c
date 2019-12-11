@@ -11,33 +11,24 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-/*
-static char				*exp_to_str(int exponent)
-{
-	char 				*tab[5000];
-
-}
-*/
-
-/*
- * В дальнейшем нужно проверить, может ли мантисса иметь менее 20 знаков. Скорее всего не может.
- * */
-
-
 
 
 static char				*float_to_str(union u_long_double	*a, t_specifications *data)
 {
 	unsigned long 		mantissa;
 	int					exponent;
-	char 				*m;
-	char 				*e;
+	char 				*result;
 
 	mantissa = a->s_parts_of_ld.m;
 	exponent = a->s_parts_of_ld.e - 16383;
-//	m = divide_m(ft_ulltoa_base(mantissa, 10), data);
+	result = divide_m(mantissa, data);
+	if (exponent >= 0)
+		result = multiplication(result, 1 << exponent);
 
-	m = ft_ulltoa_base(mantissa, 10);
+
+	return (result);
+
+	/*m = ft_ulltoa_base(mantissa, 10);
 	e = ft_itoa_base(exponent, 10);
 
 	ft_putstr("mantissa is: ");
@@ -47,7 +38,7 @@ static char				*float_to_str(union u_long_double	*a, t_specifications *data)
 	ft_putstr(e);
 	ft_putchar('\t');
 	ft_putstr("sign is: ");
-	a->s_parts_of_ld.s << 1 == 0 ?	ft_putchar('+') : ft_putchar('-');
+	a->s_parts_of_ld.s << 1 == 0 ?	ft_putchar('+') : ft_putchar('-');*/
 
 }
 

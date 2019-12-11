@@ -14,7 +14,7 @@ int		main(void)
 	unsigned long long ull = 18446744073709551615;
 	unsigned long ul = -5;
 	int y = 1000000;
-   	long double f = 1000000000.1435697;
+   	long double f = 3.14;
 	char *digit = "0000000005";
 	int dg = ft_atoi(digit);
 	char **ttab = malloc(sizeof(char **) * 5);
@@ -25,15 +25,15 @@ int		main(void)
 	ttab[4] = NULL;
 	char 	*file = "text";
 
-	float ff = 2.1f;
+	float ff = 3.1f;
 //	i = printf("Hello %.c %.c %7.6i %.s %#o %#10.10X %.p %i %-+10.3f ===%%%%s %i \n", 'A', c, -589, "***STRING***", *str, 1000, &tab, y, f, 000005);
-	i = printf("~~~|%8388609.8388608Lf|~~~\n", f);
+	i = printf("~~~|%g|~~~\n", f);
 	ft_putstr("std printf returns ");
 	ft_putnbr(i);
 	ft_putchar('\n');
 
 
-	i = ft_printf("~~~|%f|~~~\n", ff);
+	i = ft_printf("~~~|%f|~~~\n", f);
 	ft_putstr("our ft_printf returns ");
 	ft_putnbr(i);
 	ft_putchar('\n');
