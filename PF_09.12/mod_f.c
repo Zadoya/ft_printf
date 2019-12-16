@@ -22,14 +22,22 @@ static char				*float_to_str(union u_long_double	*a, t_specifications *data)
 	mantissa = a->s_parts_of_ld.m;
 	exponent = a->s_parts_of_ld.e - 16383;
 	result = divide_m(mantissa, data);
-	if (exponent >= 0)
-		result = multiplication(result, 1 << exponent);
 
+	char *m = ft_ulltoa_base(mantissa, 10);
+	char *e = ft_itoa_base(exponent, 10);
+	ft_putstr("mantissa is: ");
+	ft_putstr(m);
+	ft_putchar('\t');
+	ft_putstr("exponent is: ");
+	ft_putstr(e);
+	ft_putchar('\t');
+//	if (exponent >= 0)
+//		result = multiplication(result, 1 << exponent);
+//	else
+		result = divizion(result, data, 1 << -exponent);
 
+	ft_putstr(result);
 	return (result);
-
-	/*m = ft_ulltoa_base(mantissa, 10);
-	e = ft_itoa_base(exponent, 10);
 
 	ft_putstr("mantissa is: ");
 	ft_putstr(m);
@@ -38,8 +46,10 @@ static char				*float_to_str(union u_long_double	*a, t_specifications *data)
 	ft_putstr(e);
 	ft_putchar('\t');
 	ft_putstr("sign is: ");
-	a->s_parts_of_ld.s << 1 == 0 ?	ft_putchar('+') : ft_putchar('-');*/
-
+	a->s_parts_of_ld.s << 1 == 0 ?	ft_putchar('+') : ft_putchar('-');
+	ft_putchar('\n');
+	ft_putstr(result);
+	return (result);
 }
 
 int						mod_f(t_specifications *data, va_list *ap)

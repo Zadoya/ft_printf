@@ -54,12 +54,14 @@ static int		in_case_of_alfa(char **str, t_specifications *fmt)
 	{
 		fmt->sign[0] = **str;
 		fmt->sign[1] = *(*str + 1);
+		return (1);
 	}
 	else if ((**str == 'l' || **str == 'h' || **str == 'L') &&
 				fmt->sign[0] != 'l' && fmt->sign[0] != 'h')
 	{
 		fmt->sign[0] = **str;
 		fmt->sign[1] = 0;
+		return (1);
 	}
 	else if (ft_istype(**str))
 	{
@@ -89,7 +91,7 @@ static void		in_case_of_digit(int dot, char **str, t_specifications *fmt)
 	(*str)--;
 }
 
-int				formated(char **string, t_specifications *fmt)
+char			*formated(char **string, t_specifications *fmt)
 {
 	int			dot;
 	char		*str;
@@ -100,13 +102,13 @@ int				formated(char **string, t_specifications *fmt)
 	{
 		if (ft_isalpha(*str) || *str == '%')
 		{
-			if (in_case_of_alfa(&str, fmt))
-				break ;
+			if (!in_case_of_alfa(&str, fmt))
+				return (str);
 		}
 		else if (*str == '.')
 		{
 			if (in_case_of_dot(&dot, fmt))
-				return (1);
+				return (0);
 		}
 		else if (ft_isdigit(*str) && *str != '0')
 			in_case_of_digit(dot, &str, fmt);
@@ -114,6 +116,6 @@ int				formated(char **string, t_specifications *fmt)
 			fmt->flag[fmt->in] = *str;
 		str++;
 	}
-	*string = str;
-	return (1);
+	string = &str;
+	return (0);
 }

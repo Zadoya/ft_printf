@@ -16,10 +16,11 @@ static int				parcer(char *str, va_list *arg_ptr)
 {
 	int					quantity;
 	t_specifications	fmt;
+	char				*tmp;
 
 	quantity = 0;
-	while (*str)
-	{
+	//while(*str)
+	do {
 		if (*str != '%')
 		{
 			ft_putchar(*str);
@@ -33,11 +34,12 @@ static int				parcer(char *str, va_list *arg_ptr)
 			fmt.width = 0;
 			fmt.dot = 0;
 			str++;
-			if (formated(&str, &fmt))
+			if ((tmp = formated(&str, &fmt)))
+				str = --tmp;
+			else
 				quantity += find_function(&fmt, arg_ptr);
 		}
-		str++;
-	}
+	} while(*++str);
 	return (quantity);
 }
 

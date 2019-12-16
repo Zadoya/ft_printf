@@ -51,7 +51,7 @@ union					u_long_double
 };
 
 int						ft_printf(const char *restrict format, ...);
-int						formated(char **string, t_specifications *fmt);
+char					*formated(char **string, t_specifications *fmt);
 int						in_case_of_dot(int *dot, t_specifications *fmt);
 void					check_colour(t_specifications *data);
 void					close_colour(t_specifications *data);

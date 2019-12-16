@@ -77,5 +77,6 @@ int						mod_file(t_specifications *data, va_list *ap);
 int						mod_f(t_specifications *data, va_list *ap);
 char 					*divide_m(unsigned long long mantissa, t_specifications *data);
 char					*multiplication(char *mantissa, int exponent);
+char					*divizion(char *mantissa, t_specifications *data, unsigned long long exponent);
 
 #endif

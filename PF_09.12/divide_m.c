@@ -55,7 +55,6 @@ static char		circle_substraction(char *m, char *second_arg)
 	return (result + '0');
 }
 
-
 static void 	move_mantissa(char *m, char *second_arg, char *result, int *i)
 {
 	char 		*tmp;
@@ -79,10 +78,10 @@ static void 	move_mantissa(char *m, char *second_arg, char *result, int *i)
 	}
 	if (tmp3 - tmp > tmp - tmp2)
 		tmp = tmp2 + (tmp3 - tmp);
-	while (*tmp)
-		*tmp++ = '0';
 	if (ft_strcmp(tmp2, second_arg) < 0)
 		m = ft_memcpy(m, tmp2,tmp3 - tmp2);
+	while (*tmp)
+		*tmp++ = '0';
 }
 
 char 			*divide_m(unsigned long long mantissa, t_specifications *data)
@@ -105,5 +104,44 @@ char 			*divide_m(unsigned long long mantissa, t_specifications *data)
 		result[i++] = circle_substraction(m, "9223372036854775808");
 		move_mantissa(m, "9223372036854775808", result, &i);
 	}
+	return (result);
+}
+
+static int		move_decade(char *mantissa)
+{
+	while (*mantissa != '.')
+		mantissa++;
+	*mantissa = *(mantissa + 1);
+	*(mantissa + 1) = '.';
+	return(*mantissa - '0');
+}
+
+char			*divizion(char *mantissa, t_specifications *data, unsigned long long exponent)
+{
+	char	*result;
+	int		i;
+//	char	*tmp;
+	unsigned long long	int_part;
+
+	int_part = 1;
+	i = 0;
+	if (!(result = malloc(data->precision + 3)))
+		return (NULL);
+	result[data->precision + 3] = '\0';
+	result[i++] = '0';
+	result[i++] = '.';
+	int_part = int_part * 10 + move_decade(mantissa);
+	while(i < data->precision + 3)
+	{
+		while(int_part < exponent)
+		{
+			result[i++] = '0';
+			int_part = int_part * 10 + move_decade(mantissa);
+		}
+		result[i++] = int_part / exponent + '0';
+		int_part = (int_part % exponent) * 10 + move_decade(mantissa);;
+		//move_mantissa(mantissa, ft_itoa(exponent), result, &i);
+	}
+	//free(mantissa);
 	return (result);
 }
